@@ -1,0 +1,22 @@
+mathematical
+
+65. https://leetcode.com/problems/add-binary/
+
+                                                      int j=b.size()-1,i=a.size()-1,carr=0;
+                                                              string res="";
+                                                              while(j>=0||i>=0||carr==1){
+                                                                  if(i>=0){
+                                                                      carr+=a[i]-'0';
+                                                                      i--;
+                                                                  }
+                                                                  if(j>=0){
+                                                                      carr+=b[j]-'0';
+                                                                      j--;
+                                                                  }
+                                                                  res+=carr%2+'0';
+                                                                  carr/=2;
+                                                              }
+                                                             reverse(res.begin(),res.end()); 
+                                                              return res;
+                                                              
+ Approach : add to carry then add carry to result.
