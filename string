@@ -29,6 +29,32 @@
                       }
                       
 approach : current word, get last word delete
+            
+                                                   OR
+                                                   
+                                                   
+                                                   vector<string>v;
+                                                   string s;
+                                                   for(int i=0;i<path.size();i++){
+                                                       if(path[i]=='/')continue;
+                                                       s="";
+                                                       while(i<path.size() && path[i]!='/'){
+                                                           s+=path[i];
+                                                           i++;
+                                                       }
+                                                       if(s==".." && v.size()>0)v.pop_back();
+                                                       if(s!="." && s!="..")v.push_back(s);
+                                                   }
+                                                   v.size()>0?s="":s="/";
+                                                   for(auto x :v){
+                                                       s+='/';
+                                                       s+=x;
+                                                   }
+                                                   return s; 
+                                                   
+                                                   
+approach : separate in a vector then add to string                                                   
+                                                   
 
 
 
