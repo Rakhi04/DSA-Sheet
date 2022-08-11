@@ -20,3 +20,27 @@ mathematical
                                                               return res;
                                                               
  Approach : add to carry then add carry to result.
+
+
+
+75. https://leetcode.com/problems/the-kth-factor-of-n/
+
+
+                                                          int kthFactor(int n, int k) {
+                                                            int i;
+                                                            for(i=1;i*i<=n;i++){
+                                                                if(n%i==0 && --k==0){
+                                                                    return i;
+                                                                }
+                                                            }
+                                                            for(i-=1;i>0;i--){
+                                                                if(i*i==n)continue;
+                                                                if(n%i==0 && --k==0)return n/i;
+                                                            }
+                                                            cout<<k;
+                                                            return -1;
+                                                        }
+                                                        
+                                                        
+                                                        
+Approach : check till sqrt n then again sqrt n for rest n/i not i*                                                        
