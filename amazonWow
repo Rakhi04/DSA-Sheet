@@ -1,0 +1,71 @@
+https://leetcode.com/problems/maximum-units-on-a-truck
+
+check comparator notes 
+
+                            class Solution {
+                            public:
+                                static bool cmp(vector<int>&a,vector<int>&b){
+                                    return b[1]<a[1];
+                                }
+                                int maximumUnits(vector<vector<int>>& boxTypes, int truckSize) {
+                                    int res=0;
+                            //         int arr = []
+
+                            //         map<int,int,greater<int>>m;
+                            //         for(int i=0;i<boxTypes.size();i++){
+                            //             if(m.find(boxTypes[i][1])==m.end())m[boxTypes[i][1]]=boxTypes[i][0];
+                            //             else m[boxTypes[i][1]]+=boxTypes[i][0];
+                            //         }
+                            //         // map<int,int>::iterator it=m.begin();
+                            //         for(auto i: m){
+                            //             if(truckSize==0)break;
+                            //             if(i.second <=truckSize){
+                            //                 res+=(i.first*i.second);
+                            //                 truckSize-=i.second;
+                            //             }
+                            //             else{
+                            //                 res+=(truckSize*i.first);
+                            //                 break;
+                            //             }
+                            //         }
+
+
+
+
+                                    // while(truckSize>0 && boxTypes.size()>0){
+                                    // for(int i=1;i<boxTypes.size();i++){
+                                    //     if(boxTypes[i][1]<boxTypes[i-1][1]){
+                                    //         int a=boxTypes[i-1][0],b=boxTypes[i-1][1];
+                                    //         boxTypes[i-1][0]=boxTypes[i][0];
+                                    //         boxTypes[i-1][1]=boxTypes[i][1];
+                                    //         boxTypes[i][0]=a;
+                                    //         boxTypes[i][1]=b;
+                                    //     }
+                                    // }
+                                    //     // cout<<boxTypes[boxTypes.size()-1][1]<<" ";
+                                    //     if(boxTypes[boxTypes.size()-1][0]>truckSize){
+                                    //         res+=(truckSize*boxTypes[boxTypes.size()-1][1]);
+                                    //         truckSize=0;
+                                    //         break;
+                                    //     }
+                                    //     else{
+                                    //         res+=(boxTypes[boxTypes.size()-1][0]*boxTypes[boxTypes.size()-1][1]);
+                                    //         truckSize-=boxTypes[boxTypes.size()-1][0];
+                                    //         boxTypes.pop_back();
+                                    //     }
+                                    //     // cout<<truckSize<<" ";
+                                    // }
+
+
+
+
+                                    sort(boxTypes.begin(),boxTypes.end(),cmp);
+                                    for(auto x: boxTypes){
+                                        if(truckSize<x[0])return res+=truckSize*x[1];
+                                        res+=x[0]*x[1];
+                                        truckSize-=x[0];
+                                    }
+
+                                     return res;
+                                }
+                            };
