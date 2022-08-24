@@ -33,4 +33,58 @@ recursion or bit manipulation
                                             head=head->next;
                                         }
                                         return res;
-                                    }                        
+                                    }
+                                    
+                                    
+                                    
+                                    
+                                    
+110. https://leetcode.com/problems/copy-list-with-random-pointer/
+
+Brute force :
+
+                                                                     Node* copyRandomList(Node* head) {
+                                                                            if(!head)return NULL;
+                                                                            Node*start=new Node(head->val),*temp=start,*nxt=head->next;
+                                                                            unordered_map<Node*,Node*>m;
+                                                                            m[head]=start;
+                                                                            while(nxt){
+                                                                                temp->next=new Node(nxt->val);
+                                                                                m[nxt]=temp->next;
+                                                                                temp=temp->next;
+                                                                                nxt=nxt->next;
+                                                                            }
+                                                                            temp->next=NULL;
+                                                                            temp=start;
+                                                                            while(head){
+                                                                                if(head->random==NULL){
+                                                                                    temp->random=NULL;
+                                                                                }
+                                                                                else{
+                                                                                    temp->random=m[head->random];
+                                                                                }
+                                                                                temp=temp->next;
+                                                                                head=head->next;
+                                                                            }
+                                                                            return start;
+                                                                        }
+                                    
+                                    
+make an unordered map of Node*old ptrt pointing to new ptr
+
+
+better : add new pointers just after the old pointers then link randoms then link nexts
+
+
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
