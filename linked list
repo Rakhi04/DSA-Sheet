@@ -77,7 +77,32 @@ better : add new pointers just after the old pointers then link randoms then lin
 
 
                                     
-                                    
+                                  if(!head)return NULL;
+                                  Node*given=head,*required,*temp;
+                                  while(given){
+                                      temp=given->next;
+                                      given->next=new Node(given->val);
+                                      given->next->next=temp;
+                                      given=given->next->next;
+                                  }
+                                  given=head;
+                                  while(given){
+                                      if(given->random)given->next->random=given->random->next;
+                                      else given->next->random=NULL;
+                                      given=given->next->next;
+                                  }
+                                  given=head;
+                                  required=given->next;
+                                  temp=required;
+                                  while(required->next){
+                                      given->next=required->next;
+                                      given=given->next;
+                                      required->next=given->next;
+                                      required=required->next;
+                                  }
+                                  if(given)given->next=NULL;
+                                  if(required)required->next=NULL;
+                                  return temp;                                    
                                     
                                     
                                     
