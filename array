@@ -1,0 +1,178 @@
+https://leetcode.com/problems/spiral-matrix
+
+Input: matrix = [[1,2,3],
+                [4,5,6],
+                [7,8,9]]
+Output: [1,2,3,6,9,8,7,4,5]
+
+
+
+
+                                vector<int> spiralOrder(vector<vector<int>>& matrix) {
+                                        vector<int>res;
+                                        int ru=0,rd=matrix.size(),cl=0,cr=matrix[0].size();
+                                        while(ru<rd && cl<cr){
+                                            if(cl<cr){
+                                                for(int i=cl;i<cr;i++)
+                                                {
+                                                    if(matrix[ru][i]>-200){
+                                                    res.push_back(matrix[ru][i]);
+                                                    }
+                                                    matrix[ru][i]=-300;
+                                                }
+                                                    ru++;
+                                            }
+                                            if(ru<rd){
+                                                for(int i=ru;i<rd;i++)
+                                                {
+                                                    if(matrix[i][cr-1]>-200)
+                                                    res.push_back(matrix[i][cr-1]);
+                                                    matrix[i][cr-1]=-300;
+                                                }
+                                                    cr--;
+                                            }
+                                            if(cl<cr){
+                                                for(int i=cr-1;i>=cl;i--)
+                                                {
+                                                    if(matrix[rd-1][i]>-200)
+                                                    res.push_back(matrix[rd-1][i]);
+                                                    matrix[rd-1][i]=-300;
+                                                }
+                                                    rd--;
+                                            }
+                                            if(ru<rd){
+                                                for(int i=rd-1;i>=ru;i--)
+                                                {
+                                                    if(matrix[i][cl]>-200)
+                                                    res.push_back(matrix[i][cl]);
+                                                    matrix[i][cl]=-300;
+                                                }
+                                                    cl++;
+                                            }
+                                        }
+                                        return res;
+                                    }
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+https://leetcode.com/problems/subarray-sum-equals-k
+
+Input: nums = [1,1,1], k = 2
+Output: 2
+
+
+                  int subarraySum(vector<int>& nums, int k) {
+                          unordered_map<int,int>mp;
+                          int sum=0,res=0;
+                          for(int i=0;i<nums.size();i++){
+                              sum+=nums[i];
+                              if(sum==k)res++;
+                              res+=mp[sum-k];
+                              mp[sum]++;
+                          }
+                          return res;
+                      }
+                                    
+                                    
+                                    
+                                    
+                                    
+https://leetcode.com/problems/subarray-sums-divisible-by-k
+
+
+
+Input: nums = [4,5,0,-2,-3,1], k = 5
+Output: 7
+
+
+                                  int subarraysDivByK(vector<int>& nums, int k) {
+                                          int sum=0,res=0;
+                                          unordered_map<int,int>mp;
+                                          mp[0]=1;
+                                          for(auto x:nums){
+                                              sum=(sum+x%k+k)%k;
+                                              res+=mp[sum];
+                                              mp[sum]++;
+                                          }
+                                          return res;
+                                      }
+                                    
+                                    
+                                    
+
+
+https://leetcode.com/problems/word-search
+
+Input: board = [["A","B","C","E"],
+                ["S","F","C","S"],
+                ["A","D","E","E"]], 
+                word = "ABCCED"
+Output: true
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    bool search(vector<vector<char>>&board,string word,int i,int j,int k){
+                                    if(k==word.size())return true;
+                                    if(i<0||j<0||i>=board.size()||j>=board[0].size()||word[k]!=board[i][j])return false;
+                                    board[i][j]='#';
+                                    bool op1=search(board,word,i+1,j,k+1);
+                                    bool op2=search(board,word,i-1,j,k+1);
+                                    bool op3=search(board,word,i,j+1,k+1);
+                                    bool op4=search(board,word,i,j-1,k+1);
+                                    board[i][j]=word[k];
+                                    return op1||op2||op3||op4;
+
+                                }
+
+                                bool exist(vector<vector<char>>& board, string word) {
+                                    for(int i=0;i<board.size();i++){
+                                        for(int j=0;j<board[0].size();j++){
+                                            if(board[i][j]==word[0] && search(board,word,i,j,0))return true;
+                                        }
+                                    }
+                                    return false;
+                                }
+                                    
+                                    
+                                    
+                                    
+                                    
+https://leetcode.com/problems/jump-game
+
+Input: nums = [2,3,1,1,4]
+Output: true
+
+
+
+
+
+                                              bool check(vector<int>nums,int i){
+                                                      int j=i-1;
+                                                      while(j>=0){
+                                                          if(nums[j]-nums[i]>i-j)return true;
+                                                          j--;
+                                                      }
+                                                      return false;
+                                                  }
+
+                                                  bool canJump(vector<int>& nums) {
+                                                      // if(nums.size()==1)return true;
+                                                      for(int i=0;i<nums.size()-1;i++){
+                                                          if(nums[i]==0 && !check(nums,i))return false;
+                                                      }
+                                                      return true;
+                                                  }
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
